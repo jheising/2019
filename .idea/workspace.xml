@@ -7,6 +7,7 @@
     <file path="/index.html" changelist="68bf76f2-5e86-45fd-8893-69c14709eed6" time="1399085164609" ignored="false" />
     <file path="/app.js" changelist="68bf76f2-5e86-45fd-8893-69c14709eed6" time="1399101842182" ignored="false" />
     <file path="/style.css" changelist="68bf76f2-5e86-45fd-8893-69c14709eed6" time="1399086120859" ignored="false" />
+    <file path="/.gitignore" changelist="68bf76f2-5e86-45fd-8893-69c14709eed6" time="1399102823418" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,10 +54,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="11" selection-start="2680" selection-end="2680" vertical-scroll-proportion="0.38485804">
+            <state line="77" column="11" selection-start="2680" selection-end="2680" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -76,6 +86,7 @@
         <option value="$PROJECT_DIR$/style.css" />
         <option value="$PROJECT_DIR$/index2.html" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -327,7 +338,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="11" selection-start="2680" selection-end="2680" vertical-scroll-proportion="0.38485804">
+        <state line="77" column="11" selection-start="2680" selection-end="2680" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
