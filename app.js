@@ -72,6 +72,8 @@ $(function() {
             {id:"twinkle", src:"img/twinkling.png"},
             {id:"blinker1", src:"img/blinker1.png"},
             {id:"blinker2", src:"img/blinker2.png"},
+            {id:"blinker3", src:"img/blinker3.png"},
+            {id:"lightning", src:"img/lightning.png"},
             {id:"neon1", src:"img/neon1.png"},
             {id:"neon2", src:"img/neon2.png"},
             {id:"ambientSound", src:"sound/ambient.mp3", type:createjs.LoadQueue.SOUND}
@@ -101,6 +103,8 @@ $(function() {
         images.twinkle = loadQueue.getResult("twinkle");
         images.blinker1 = new createjs.Bitmap(loadQueue.getResult("blinker1"));
         images.blinker2 = new createjs.Bitmap(loadQueue.getResult("blinker2"));
+        images.blinker3 = new createjs.Bitmap(loadQueue.getResult("blinker3"));
+        images.lighting = new createjs.Bitmap(loadQueue.getResult("lightning"));
         images.neon1 = new createjs.Bitmap(loadQueue.getResult("neon1"));
         images.neon2 = new createjs.Bitmap(loadQueue.getResult("neon2"));
 
@@ -122,6 +126,15 @@ $(function() {
         images.blinker2.y = 295;
         layers.backgroundOverlay.addChild(images.blinker2);
 
+        images.blinker3.x = 199;
+        images.blinker3.y = 250;
+        layers.backgroundOverlay.addChild(images.blinker3);
+
+        images.lighting.alpha = 0;
+        images.lighting.x = 574;
+        images.lighting.y = 0;
+        layers.backgroundOverlay.addChild(images.lighting);
+
         images.neon1.x = 74;
         images.neon1.y = 769;
         layers.backgroundOverlay.addChild(images.neon1);
@@ -132,13 +145,24 @@ $(function() {
 
         makeBlink(images.blinker1, 2500, 1500, 0);
         makeBlink(images.blinker2, 1000, 1000, 250);
+        makeBlink(images.blinker3, 30000, 60000, 0);
         makeBlink(images.neon2, 250, 500, 0);
 
         resize();
 
         createjs.Ticker.setFPS(24);
         createjs.Ticker.addEventListener("tick", tick);
+
+        // Play our sound
+        createjs.Sound.play("ambientSound", createjs.Sound.INTERRUPT_ANY, 0, 0, -1, 1, 0);
+
+        $("#loadingIndicator").delay(2500).fadeOut(5000, function(){
+            $(this).remove();
+        });
     }
+
+    var lightningOn = false;
+    var lightningLength = getRandom(250, 1000);
 
     function tick()
     {
@@ -151,6 +175,39 @@ $(function() {
 
         processNeon(images.neon1);
 
+        // Do our lightning
+        if(!lightningOn)
+        {
+            lightningLength--;
+
+            if(lightningLength <= 0)
+            {
+                lightningOn = true;
+                lightningLength = getRandom(25, 50);
+            }
+        }
+        else
+        {
+            if(getRandom(0,500) < 25)
+            {
+                images.lighting.alpha = 0;
+            }
+            else
+            {
+                images.lighting.alpha = 1;
+            }
+
+            lightningLength--;
+
+            if(lightningLength <= 0)
+            {
+                lightningLength = getRandom(250, 1000);
+                images.lighting.alpha = 0;
+                lightningOn = false;
+            }
+        }
+
+
         // Randomly move our film grain
         layers.filmGrain.x = getRandom(-500, 500) - 500;
         layers.filmGrain.y = getRandom(-500, 500) - 500;
@@ -159,6 +216,24 @@ $(function() {
     }
 
     init();
+
+    $('#fullscreen').click(function () {
+        if (screenfull.enabled) {
+
+            screenfull.toggle();
+            $('#fullscreen').toggleClass("fa-expand", !screenfull.isFullscreen).toggleClass("fa-compress", screenfull.isFullscreen);
+        }
+    });
+
+    var isMute = false;
+
+    $('#mute').click(function () {
+
+        isMute = !isMute;
+        createjs.Sound.setMute(isMute);
+        $('#mute').toggleClass("fa-volume-up", !isMute).toggleClass("fa-volume-off", isMute);
+
+    });
 });
 
 function getRandom (min, max) {
@@ -191,5 +266,10 @@ function makeBlink(target, onTime, offTime, fadeTime)
     createjs.Tween.get(target, {override:true}).wait(getRandom(0, offTime)).call(beginAnimation);
 }
 
-
+/*!
+ * screenfull
+ * v1.2.0 - 2014-04-29
+ * (c) Sindre Sorhus; MIT License
+ */
+!function(){"use strict";var a="undefined"!=typeof module&&module.exports,b="undefined"!=typeof Element&&"ALLOW_KEYBOARD_INPUT"in Element,c=function(){for(var a,b,c=[["requestFullscreen","exitFullscreen","fullscreenElement","fullscreenEnabled","fullscreenchange","fullscreenerror"],["webkitRequestFullscreen","webkitExitFullscreen","webkitFullscreenElement","webkitFullscreenEnabled","webkitfullscreenchange","webkitfullscreenerror"],["webkitRequestFullScreen","webkitCancelFullScreen","webkitCurrentFullScreenElement","webkitCancelFullScreen","webkitfullscreenchange","webkitfullscreenerror"],["mozRequestFullScreen","mozCancelFullScreen","mozFullScreenElement","mozFullScreenEnabled","mozfullscreenchange","mozfullscreenerror"],["msRequestFullscreen","msExitFullscreen","msFullscreenElement","msFullscreenEnabled","MSFullscreenChange","MSFullscreenError"]],d=0,e=c.length,f={};e>d;d++)if(a=c[d],a&&a[1]in document){for(d=0,b=a.length;b>d;d++)f[c[0][d]]=a[d];return f}return!1}(),d={request:function(a){var d=c.requestFullscreen;a=a||document.documentElement,/5\.1[\.\d]* Safari/.test(navigator.userAgent)?a[d]():a[d](b&&Element.ALLOW_KEYBOARD_INPUT)},exit:function(){document[c.exitFullscreen]()},toggle:function(a){this.isFullscreen?this.exit():this.request(a)},onchange:function(){},onerror:function(){},raw:c};return c?(Object.defineProperties(d,{isFullscreen:{get:function(){return!!document[c.fullscreenElement]}},element:{enumerable:!0,get:function(){return document[c.fullscreenElement]}},enabled:{enumerable:!0,get:function(){return!!document[c.fullscreenEnabled]}}}),document.addEventListener(c.fullscreenchange,function(a){d.onchange.call(d,a)}),document.addEventListener(c.fullscreenerror,function(a){d.onerror.call(d,a)}),void(a?module.exports=d:window.screenfull=d)):void(a?module.exports=!1:window.screenfull=!1)}();
 
