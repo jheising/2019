@@ -153,12 +153,16 @@ $(function() {
         createjs.Ticker.setFPS(24);
         createjs.Ticker.addEventListener("tick", tick);
 
-        // Play our sound
-        createjs.Sound.play("ambientSound", createjs.Sound.INTERRUPT_ANY, 0, 0, -1, 1, 0);
+        // Give a moment for our sound to load
+        setTimeout(function(){
 
-        $("#loadingIndicator").delay(2500).fadeOut(5000, function(){
-            $(this).remove();
-        });
+            createjs.Sound.play("ambientSound", createjs.Sound.INTERRUPT_ANY, 0, 0, -1, 1, 0);
+
+            $("#loadingIndicator").delay(2500).fadeOut(5000, function(){
+                $(this).remove();
+            });
+
+        }, 1000);
     }
 
     var lightningOn = false;
