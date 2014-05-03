@@ -167,11 +167,11 @@ $(function() {
     function tick()
     {
         // Make our twinkle
-        if(getRandom(0,100) < 25)
-        {
+        //if(getRandom(0,100) < 25)
+        //{
             layers.twinkle.x = getRandom(-500, 500) - 500;
             layers.twinkle.y = getRandom(-500, 500) - 500;
-        }
+        //}
 
         processNeon(images.neon1);
 
