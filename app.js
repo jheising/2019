@@ -1,10 +1,11 @@
+var stage;
+var loadQueue;
+var layers = {};
+var images = {};
+
 $(function() {
 
     var canvas = document.getElementById("mainCanvas");
-    var stage;
-    var loadQueue;
-    var layers = {};
-    var images = {};
 
     function calculateAspectFillScale(targetWidth, targetHeight, nativeWidth, nativeHeight)
     {
@@ -24,6 +25,16 @@ $(function() {
         bitmap.scaleX = scaleRatio;
         bitmap.scaleY = scaleRatio;
     }*/
+
+    function spinnerFlight1()
+    {
+        layers.spinner.x = 1400;
+        layers.spinner.y = 650;
+        //layers.spinner.alpha = 0;
+
+        createjs.Tween.get(layers.spinner, {loop:true}).to({x:980,y:680}, 2000).to({alpha:0});
+
+    }
 
     function resize()
     {
@@ -74,8 +85,11 @@ $(function() {
             {id:"blinker2", src:"img/blinker2.png"},
             {id:"blinker3", src:"img/blinker3.png"},
             {id:"lightning", src:"img/lightning.png"},
+            {id:"smoke", src:"img/smoke.png"},
+            {id:"smokeOverlay", src:"img/smokeOverlay.png"},
             {id:"neon1", src:"img/neon1.png"},
             {id:"neon2", src:"img/neon2.png"},
+            {id:"spinner", src:"img/spinner.png"},
             {id:"ambientSound", src:"sound/ambient.mp3", type:createjs.LoadQueue.SOUND}
         ]);
 
@@ -89,9 +103,12 @@ $(function() {
         layers.background = new createjs.Container();
         layers.backgroundOverlay = new createjs.Container();
         layers.twinkle = new createjs.Shape();
+        layers.smokeOverlay = new createjs.Container();
+        layers.smoke = new createjs.Shape();
         layers.filmGrain = new createjs.Shape();
+        layers.spinner = new createjs.Container();
 
-        stage.addChild(layers.background);
+        //stage.addChild(layers.background);
         stage.addChild(layers.twinkle);
         stage.addChild(layers.backgroundOverlay);
         stage.addChild(layers.filmGrain);
@@ -105,8 +122,11 @@ $(function() {
         images.blinker2 = new createjs.Bitmap(loadQueue.getResult("blinker2"));
         images.blinker3 = new createjs.Bitmap(loadQueue.getResult("blinker3"));
         images.lighting = new createjs.Bitmap(loadQueue.getResult("lightning"));
+        images.smokeOverlay = new createjs.Bitmap(loadQueue.getResult("smokeOverlay"));
+        images.smoke = loadQueue.getResult("smoke");
         images.neon1 = new createjs.Bitmap(loadQueue.getResult("neon1"));
         images.neon2 = new createjs.Bitmap(loadQueue.getResult("neon2"));
+        images.spinner = new createjs.Bitmap(loadQueue.getResult("spinner"));
 
         // Work on our background
         layers.background.setBounds(0,0, images.background.image.width, images.background.image.height);
@@ -118,6 +138,29 @@ $(function() {
         images.backgroundOverlay.filters = [amf];
         images.backgroundOverlay.cache(0, 0, images.backgroundMask.image.width, images.backgroundMask.image.height);
         layers.backgroundOverlay.addChild(images.backgroundOverlay);
+
+        // Spinner
+        //layers.spinner.addChild(images.spinner);
+        //layers.backgroundOverlay.addChild(layers.spinner);
+
+        // Setup our smoke
+
+        layers.smoke.graphics.clear();
+        layers.smoke.graphics.beginBitmapFill(images.smoke,'repeat').drawRect(0, 0, images.smoke.width, images.smoke.height * 2);
+
+        layers.smoke.alpha = 0.5;
+        layers.smokeOverlay.x = 737;
+        layers.smokeOverlay.y = 277;
+        var smokeMask = new createjs.Shape();
+        smokeMask.graphics.beginFill("#000").drawRect(layers.smokeOverlay.x,layers.smokeOverlay.y,images.smokeOverlay.image.width, images.smokeOverlay.image.height);
+        layers.smokeOverlay.mask = smokeMask;
+        layers.smokeOverlay.setBounds(0,0,52,53);
+        layers.smokeOverlay.addChild(layers.smoke);
+        layers.smokeOverlay.addChild(images.smokeOverlay);
+
+        layers.backgroundOverlay.addChild(layers.smokeOverlay);
+
+        createjs.Tween.get(layers.smoke, {override:true, loop:true}).to({y:-images.smoke.height}, 15000);
 
         // Setup our blinkers and neons
         layers.backgroundOverlay.addChild(images.blinker1);
@@ -158,6 +201,8 @@ $(function() {
         $("#loadingIndicator").delay(2500).fadeOut(5000, function(){
             $(this).remove();
         });
+
+        //spinnerFlight1();
     }
 
     var lightningOn = false;
