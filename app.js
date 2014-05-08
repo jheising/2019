@@ -74,8 +74,9 @@ $(function() {
 
         loadQueue = new createjs.LoadQueue();
         loadQueue.installPlugin(createjs.Sound);
-        //loadQueue.setUseXHR(false);
-        loadQueue.on("complete", buildInterface, this);
+        loadQueue.setUseXHR(false);
+        loadQueue.on("complete", finishLoad, this);
+        loadQueue.on("fileload", finishLoad, this); // Had to add this because the sound wasn't downloading correctly...
         loadQueue.loadManifest([
             {id:"background", src:"img/background.jpg"},
             {id:"backgroundMask", src:"img/background-mask.png"},
@@ -94,6 +95,28 @@ $(function() {
         ]);
 
         window.onresize = resize;
+    }
+
+    var filesCompleted = false;
+    var soundsCompleted = false;
+    function finishLoad(event)
+    {
+        if(event.type == "fileload")
+        {
+            if(event.item.id == "ambientSound")
+            {
+                soundsCompleted = true;
+            }
+        }
+        else
+        {
+            filesCompleted = true;
+        }
+
+        if(filesCompleted && soundsCompleted)
+        {
+            buildInterface();
+        }
     }
 
     function buildInterface()
