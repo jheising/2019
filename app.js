@@ -74,7 +74,7 @@ $(function() {
 
         loadQueue = new createjs.LoadQueue();
         loadQueue.installPlugin(createjs.Sound);
-        loadQueue.setUseXHR(false);
+        //loadQueue.setUseXHR(false);
         loadQueue.on("complete", buildInterface, this);
         loadQueue.loadManifest([
             {id:"background", src:"img/background.jpg"},
