@@ -73,10 +73,8 @@ $(function() {
         stage = new createjs.Stage("mainCanvas");
 
         loadQueue = new createjs.LoadQueue();
-        loadQueue.installPlugin(createjs.Sound);
         loadQueue.setUseXHR(false);
         loadQueue.on("complete", finishLoad, this);
-        loadQueue.on("fileload", finishLoad, this); // Had to add this because the sound wasn't downloading correctly...
         loadQueue.loadManifest([
             {id:"background", src:"img/background.jpg"},
             {id:"backgroundMask", src:"img/background-mask.png"},
@@ -91,8 +89,9 @@ $(function() {
             {id:"neon1", src:"img/neon1.png"},
             {id:"neon2", src:"img/neon2.png"},
             {id:"spinner", src:"img/spinner.png"},
-            {id:"ambientSound", src:"sound/ambient.mp3", type:createjs.LoadQueue.SOUND}
         ]);
+
+        $("#ambientAudio").on("canplay", finishLoad);
 
         window.onresize = resize;
     }
@@ -101,12 +100,9 @@ $(function() {
     var soundsCompleted = false;
     function finishLoad(event)
     {
-        if(event.type == "fileload")
+        if(event.type == "canplay")
         {
-            if(event.item.id == "ambientSound")
-            {
-                soundsCompleted = true;
-            }
+            soundsCompleted = true;
         }
         else
         {
