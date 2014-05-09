@@ -24,7 +24,7 @@ a, a:visited, a:hover
 
 #loadingIndicator
 {
-    z-index: 10;
+    z-index: 2000;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -33,7 +33,7 @@ a, a:visited, a:hover
 
 #footer
 {
-    z-index: 12;
+    z-index: 3000;
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -69,6 +69,7 @@ a, a:visited, a:hover
     bottom: 18px;
     left: 106px;
 }
+
 .bubble-loader div {
     -webkit-animation: bubble 1100ms forwards infinite;
     animation: bubble 1100ms forwards infinite;
@@ -88,6 +89,58 @@ a, a:visited, a:hover
 .bubble-loader div:nth-child(1), .bubble-loader div:nth-child(5) {
     -webkit-animation-delay: 250ms;
     animation-delay: 250ms;
+}
+
+#videoContainer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    -webkit-perspective: 420;
+    perspective: 420;
+    -webkit-perspective-origin-x: 200px;
+    perspective-origin-x: 200px;
+    -webkit-perspective-origin-y: 928px;
+    perspective-origin-y: 928px;
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+}
+
+#videoSource
+{
+    width: auto    !important;
+    height: 100%   !important;
+}
+
+#videoScreen {
+    position: absolute;
+    font-size: 12pt;
+    background-color: #000;
+    -webkit-transform: rotateY(-19deg);
+    transform: rotateY(-19deg);
+    right: 169px;
+    top: -30px;
+    overflow: hidden;
+}
+
+#videoOverlay
+{
+    background: url(img/videoOverlay.png) no-repeat;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 7px;
+    top: 0px;
+}
+
+#grain
+{
+    position: absolute;
+    z-index:1000;
+}
+
+#mediaSources
+{
+    display: none;
 }
 
 @keyframes bubble {

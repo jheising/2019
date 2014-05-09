@@ -7,16 +7,41 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.createjs.com/createjs-2013.12.12.min.js"></script>
-    <script src="app.js"></script>
+    <script src="js/app.js"></script>
 </head>
 <body>
-<audio id="ambientAudio" loop autoplay>
-    <source src="sound/ambient.mp3" type="audio/mpeg">
-</audio>
-<canvas id="mainCanvas"></canvas>
-<div id="loadingIndicator">
-    <div class="bubble-loader"><div class="1"></div><div class="2"></div><div class="3"></div><div class="4"></div><div class="5"></div></div>
+
+<div id="mediaSources">
+    <audio id="ambientAudio" loop autoplay>
+        <source src="media/ambient.mp3" type="audio/mpeg">
+    </audio>
+
 </div>
+
+<canvas id="mainCanvas"></canvas>
+
+<div id="videoContainer">
+    <div id="videoScreen">
+        <video id="videoSource" autoplay="true" loop="false" controls="false">
+            <source src="media/vid.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div id="videoOverlay">
+    </div>
+</div>
+
+<canvas id="grain"></canvas>
+
+<div id="loadingIndicator">
+    <div class="bubble-loader">
+        <div class="1"></div>
+        <div class="2"></div>
+        <div class="3"></div>
+        <div class="4"></div>
+        <div class="5"></div>
+    </div>
+</div>
+
 <div id="footer">
     <a target="_blank" href="https://github.com/jheising/2019">2019</a>
     <div id="controls" class="toolbar"><i id="fullscreen" class="fa fa-expand"></i><i id="mute" class="fa fa-volume-up"></i></div>
