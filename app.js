@@ -19,13 +19,6 @@ $(function() {
         return ratio;
     }
 
-    /*function aspectFillLayer(target, imageWidth, imageHeight, center)
-    {
-        var scaleRatio = calculateAspectFillScale(width, height, imageWidth, imageHeight);
-        bitmap.scaleX = scaleRatio;
-        bitmap.scaleY = scaleRatio;
-    }*/
-
     function spinnerFlight1()
     {
         layers.spinner.x = 1400;
@@ -41,14 +34,14 @@ $(function() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-
-
         if(images.background)
         {
             var scaleRatio = calculateAspectFillScale(canvas.width, canvas.height, images.background.image.width, images.background.image.height);
 
             layers.background.scaleX = layers.background.scaleY = scaleRatio;
             layers.backgroundOverlay.scaleX = layers.backgroundOverlay.scaleY = scaleRatio;
+
+            layers.background.x = layers.backgroundOverlay.x = canvas.width - images.background.image.width * scaleRatio; // Right align
         }
 
         if(layers.filmGrain)
@@ -70,10 +63,15 @@ $(function() {
 
     function init()
     {
+        $("#controls").hide();
+
         stage = new createjs.Stage("mainCanvas");
 
         loadQueue = new createjs.LoadQueue();
-        loadQueue.setUseXHR(false);
+
+        if(location.protocol == "file:")
+            loadQueue.setUseXHR(false);
+
         loadQueue.on("complete", finishLoad, this);
         loadQueue.loadManifest([
             {id:"background", src:"img/background.jpg"},
@@ -118,6 +116,8 @@ $(function() {
     function buildInterface()
     {
         resize();
+
+        $(".bubble-loader").animate({opacity:0.0},  1000);
 
         layers.background = new createjs.Container();
         layers.backgroundOverlay = new createjs.Container();
@@ -212,12 +212,14 @@ $(function() {
 
         resize();
 
+        $("#controls").fadeIn();
+
         createjs.Ticker.setFPS(24);
         createjs.Ticker.addEventListener("tick", tick);
 
         createjs.Sound.play("ambientSound", createjs.Sound.INTERRUPT_NONE, 0, 0, -1, 1, 0);
 
-        $("#loadingIndicator").delay(2500).fadeOut(5000, function(){
+        $("#loadingIndicator").fadeOut(5000, function(){
             $(this).remove();
         });
 
