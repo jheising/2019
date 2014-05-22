@@ -47,4 +47,5 @@ Videos on Billboard: https://vimeo.com/[65241541, 14288152, 41881648, 75272501, 
 Feel free to use in any way you see fit, but any attributions and/or general praise are always appreciated :)
 
 Copyright © 2014 Jim Heising (https://github.com/jheising)
+
 Licensed under the MIT license.
