@@ -39,5 +39,5 @@ Many... I've only optimized for Chrome and Safari on the Mac. Firefox appears to
 ### Credits
 
 Music/Sound: https://www.youtube.com/watch?v=TrwomEhVklw and http://curtis8516.tumblr.com/
-Videos on Billboard: 
 
+Videos on Billboard: https://vimeo.com/[65241541, 14288152, 41881648, 75272501, 6839316, 11057525, 35602560, 2026165, 27910846, 26199158, 84608237, 49037990, 33188079, 72038249, 67923125]
