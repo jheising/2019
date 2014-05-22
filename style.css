@@ -107,8 +107,10 @@ a, a:visited, a:hover
 
 #videoSource
 {
-    width: auto    !important;
-    height: 100%   !important;
+    width: 2005px    !important;
+    height: 1144px   !important;
+    position: absolute;
+    left: -752px;
 }
 
 #videoScreen {
