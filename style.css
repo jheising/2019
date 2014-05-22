@@ -107,10 +107,11 @@ a, a:visited, a:hover
 
 #videoSource
 {
-    width: 2005px    !important;
-    height: 1144px   !important;
+    width: 2005px !important;
+    height: 1178px !important;
     position: absolute;
     left: -752px;
+    top: -39px;
 }
 
 #videoScreen {
