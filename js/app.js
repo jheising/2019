@@ -6,25 +6,23 @@ var videoScreenHeight = 1152;
 var videoScreenWidth = 495;
 var grainStage;
 
-var videos = [65241541, 14288152, 41881648]; // Some default cool videos
-var videoIndex = 0;
+var videos = [65241541, 14288152, 41881648, 75272501, 6839316, 11057525, 13177797, 13179303]; // Some default cool videos
 
 function loadVideoPlaylist(_videos)
 {
     videos = _videos;
-    videoIndex = 0;
     playNextVideoInPlaylist();
+}
+
+function randomIntFromInterval(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 function playNextVideoInPlaylist()
 {
-    loadVimeoVideo(videos[videoIndex]);
-
-    videoIndex++;
-    if(videoIndex >= videos.length)
-    {
-        videoIndex = 0;
-    }
+    var randomIndex = randomIntFromInterval(0, videos.length - 1);
+    loadVimeoVideo(videos[randomIndex]);
 }
 
 function loadVimeoVideo(videoID) {
