@@ -2,13 +2,8 @@ var stage;
 var loadQueue;
 var layers = {};
 var images = {};
-var videoScreenHeight = 1152;
-var videoScreenWidth = 495;
-var grainStage;
 
 $(function() {
-
-    var grainCanvas = document.getElementById("grain");
     var canvas = document.getElementById("mainCanvas");
 
     function calculateAspectFillScale(targetWidth, targetHeight, nativeWidth, nativeHeight)
@@ -35,8 +30,8 @@ $(function() {
 
     function resize()
     {
-        grainCanvas.width = canvas.width = window.innerWidth;
-        grainCanvas.height = canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
         if(images.background)
         {
@@ -46,27 +41,19 @@ $(function() {
             layers.backgroundOverlay.scaleX = layers.backgroundOverlay.scaleY = scaleRatio;
 
             layers.background.x = layers.backgroundOverlay.x = canvas.width - images.background.image.width * scaleRatio; // Right align
-
-            $("#videoScreen").width(videoScreenWidth);
-            $("#videoScreen").height(videoScreenHeight);
-
-            $("#videoContainer").width(572);
-            $("#videoContainer").height(images.background.image.height);
-            $("#videoContainer").css({"-webkit-transform" : "scale(" + scaleRatio + "," + scaleRatio + ")"});
         }
 
-        if(layers.filmGrain)
+        /*if(layers.filmGrain)
         {
             // Work on our film grain
             layers.filmGrain.graphics.clear();
             layers.filmGrain.graphics.beginBitmapFill(images.filmGrain,'repeat').drawRect(0, 0, canvas.width + 1000, canvas.height + 1000);
 
             layers.filmGrain.cache(0,0, canvas.width + 1000, canvas.height + 1000);
-        }
+        }*/
 
         if(layers.twinkle)
         {
-            // Work on our film grain
             layers.twinkle.graphics.clear();
             layers.twinkle.graphics.beginBitmapFill(images.twinkle,'repeat').drawRect(0, 0, canvas.width + 1000, canvas.height + 1000);
 
@@ -83,7 +70,6 @@ $(function() {
         $("#controls").hide();
 
         stage = new createjs.Stage("mainCanvas");
-        grainStage = new createjs.Stage("grain");
 
         loadQueue = new createjs.LoadQueue();
 
@@ -108,6 +94,8 @@ $(function() {
         ]);
 
         $("#ambientAudio").on("canplay", finishLoad);
+
+        init3dVideo(document.getElementById("mainCanvas"), document.getElementById("videoSource"), document.getElementById("videoSourceCopy"));
 
         window.onresize = resize;
     }
@@ -163,8 +151,6 @@ $(function() {
         images.neon1 = new createjs.Bitmap(loadQueue.getResult("neon1"));
         images.neon2 = new createjs.Bitmap(loadQueue.getResult("neon2"));
         images.spinner = new createjs.Bitmap(loadQueue.getResult("spinner"));
-
-        grainStage.addChild(layers.filmGrain);
 
         // Work on our background
         layers.background.setBounds(0,0, images.background.image.width, images.background.image.height);
@@ -286,11 +272,12 @@ $(function() {
         }
 
         // Randomly move our film grain
-        layers.filmGrain.x = getRandom(-500, 500) - 500;
-        layers.filmGrain.y = getRandom(-500, 500) - 500;
+        //layers.filmGrain.x = getRandom(-500, 500) - 500;
+        //layers.filmGrain.y = getRandom(-500, 500) - 500;
 
         stage.update();
-        grainStage.update();
+
+        draw3dVideo();
     }
 
     init();

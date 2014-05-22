@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.createjs.com/createjs-2013.12.12.min.js"></script>
+    <script src="js/jsgl.js"></script>
+    <script src="js/video3d.js"></script>
     <script src="js/app.js"></script>
 </head>
 <body>
@@ -15,22 +17,13 @@
     <audio id="ambientAudio" loop autoplay>
         <source src="media/ambient.mp3" type="audio/mpeg">
     </audio>
-
+    <video id="videoSource" autoplay="true" loop="true" controls="false">
+        <source src="media/vid.mp4" type="video/mp4">
+    </video>
+    <canvas id="videoSourceCopy" width="360" height="480"></canvas>
 </div>
 
 <canvas id="mainCanvas"></canvas>
-
-<div id="videoContainer">
-    <div id="videoScreen">
-        <video id="videoSource" autoplay="true" loop="false" controls="false">
-            <source src="media/vid.mp4" type="video/mp4">
-        </video>
-    </div>
-    <div id="videoOverlay">
-    </div>
-</div>
-
-<canvas id="grain"></canvas>
 
 <div id="loadingIndicator">
     <div class="bubble-loader">
