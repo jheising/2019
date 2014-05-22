@@ -145,8 +145,6 @@ $(function () {
     }
 
     function init() {
-        $("#controls").hide();
-
         stage = new createjs.Stage("mainCanvas");
         grainStage = new createjs.Stage("grain");
 
@@ -343,6 +341,17 @@ $(function () {
 
         stage.update();
         grainStage.update();
+    }
+
+    $("#controls").hide();
+
+    var isWebkit = (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) || (/Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor));
+
+    if(!isWebkit)
+    {
+        $(".bubble-loader").hide();
+        $("#loadingIndicator").append('<div style="text-align: center; position: absolute; bottom: 25px; width: 100%">This experiment requires Chrome or Safari</div>');
+        return;
     }
 
     init();
