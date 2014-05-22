@@ -367,8 +367,8 @@ $(function () {
     $('#mute').click(function () {
 
         isMute = !isMute;
-        createjs.Sound.setMute(isMute);
-        $('#mute').toggleClass("fa-volume-up", !isMute).toggleClass("fa-volume-off", isMute);
+        $('#mute').toggleClass("fa-volume-up", !isMute).toggleClass("fa-volume-off", isMute)[0];
+        $('#ambientAudio')[0].muted = isMute;
 
     });
 
