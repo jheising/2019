@@ -50,6 +50,12 @@ function loadVimeoVideo(videoID) {
         contentWindow.postMessage(JSON.stringify(message), url);*/
 
         message = {
+            method: "addEventListener",
+            value: "finish"
+        };
+        contentWindow.postMessage(JSON.stringify(message), url);
+
+        message = {
             method: "play"
         };
         contentWindow.postMessage(JSON.stringify(message), url);
