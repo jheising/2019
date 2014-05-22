@@ -7,8 +7,8 @@ var stage;
 var loadQueue;
 var layers = {};
 var images = {};
-var videoScreenHeight = 1152;
-var videoScreenWidth = 495;
+var videoScreenHeight = 1141;
+var videoScreenWidth = 563;
 var grainStage;
 var infoIsOpen = false;
 
