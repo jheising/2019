@@ -25,6 +25,10 @@ Originally my idea was to build this entirely in 3D, but IMHO even the best Holl
 
 Sit back, drone out and imagine what it would be like to live in Los Angeles, 2019.
 
+### Change the billboard movies
+
+You can change the videos that randomly play on the billboard by appending a ?videos= and a comma separated list of Vimeo video IDs. For example: http://jheising.github.io/2019?videos=21589292,14294561
+
 ### Limitations
 
 Many... I've only optimized for Chrome and Safari on the Mac. Firefox appears to be quite slow. Appears to crash most mobile browsers. Don't even get me started with IE...
@@ -34,6 +38,7 @@ Many... I've only optimized for Chrome and Safari on the Mac. Firefox appears to
 - Increase performace
 - More random lights turning on/off
 - Add animations for flying Spinners
+- Support for YouTube videos
 - Create a mobile version (if possible)
 
 ### Credits
