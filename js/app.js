@@ -24,19 +24,18 @@ function loadVimeoVideo(videoID)
             method : "setVolume",
             value : 0
         };
-        /*contentWindow.postMessage(JSON.stringify(message), url);
+        contentWindow.postMessage(JSON.stringify(message), url);
 
         message = {
             method : "setLoop",
             value : 1
         };
-        contentWindow.postMessage(JSON.stringify(message), url);*/
+        contentWindow.postMessage(JSON.stringify(message), url);
 
         message = {
             method : "play"
         };
         contentWindow.postMessage(JSON.stringify(message), url);
-
     });
 }
 
