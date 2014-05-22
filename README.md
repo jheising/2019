@@ -52,7 +52,7 @@ A few other javascript libraries which are credited in the code.
 
 ### License
 
-Feel free to use in any way you see fit, but any attributions and/or general praise are always appreciated :)
+Feel free to use in any way you see fit, but attributions, links, twitter followers and/or general praise are always appreciated : )
 
 Copyright © 2014 Jim Heising (https://github.com/jheising)
 
