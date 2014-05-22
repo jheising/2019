@@ -27,7 +27,7 @@ Sit back, drone out and imagine what it would be like to live in Los Angeles, 20
 
 ### Limitations
 
-Many... I've only optimized for Chrome and Safari on the Mac. Firefox appears to be quite slow. Appears to crash most mobile browsers.
+Many... I've only optimized for Chrome and Safari on the Mac. Firefox appears to be quite slow. Appears to crash most mobile browsers. Don't even get me started with IE...
 
 ### To Dos
 
