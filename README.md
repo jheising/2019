@@ -41,6 +41,7 @@ Many... I've only optimized for Chrome and Safari on the Mac. Firefox appears to
 - Add animations for flying Spinners
 - Support for YouTube videos
 - Create a mobile version (if possible)
+- Support for more browsers
 
 ### Credits
 

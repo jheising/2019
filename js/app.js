@@ -343,7 +343,7 @@ $(function () {
         grainStage.update();
     }
 
-    $("#controls").hide();
+    $("#controls").fadeOut(0);
 
     var isWebkit = (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) || (/Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor));
 
