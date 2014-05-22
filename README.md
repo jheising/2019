@@ -54,6 +54,6 @@ A few other javascript libraries which are credited in the code.
 
 Feel free to use in any way you see fit, but attributions, links, twitter followers and/or general praise are always appreciated : )
 
-Copyright © 2014 Jim Heising <jheising@gmail.com> (https://github.com/jheising)
+Copyright © 2014 Jim Heising, jheising@gmail.com
 
 Licensed under the MIT license.
