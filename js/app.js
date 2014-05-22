@@ -5,24 +5,14 @@ var images = {};
 var videoScreenHeight = 1152;
 var videoScreenWidth = 495;
 var grainStage;
+var infoIsOpen = false;
 
-var videos = [65241541, 14288152, 41881648, 75272501, 6839316, 11057525, 13177797, 13179303, 35602560, 2026165, 27910846, 2881326]; // Some default cool videos
-
-function loadVideoPlaylist(_videos)
-{
-    videos = _videos;
-    playNextVideoInPlaylist();
-}
-
-function randomIntFromInterval(min,max)
-{
-    return Math.floor(Math.random()*(max-min+1)+min);
-}
+var videos = [65241541, 14288152, 41881648, 75272501, 6839316, 11057525, 35602560, 2026165, 27910846, 26199158, 84608237, 49037990, 33188079, 72038249, 67923125]; // Some default cool videos
 
 function playNextVideoInPlaylist()
 {
-    var randomIndex = randomIntFromInterval(0, videos.length - 1);
-    loadVimeoVideo(videos[randomIndex]);
+    var randomIndex = getRandom(0, videos.length - 1);
+    loadVimeoVideo(videos[randomIndex].toString().trim());
 }
 
 function loadVimeoVideo(videoID) {
@@ -305,8 +295,6 @@ $(function () {
         $("#loadingIndicator").fadeOut(5000, function () {
             $(this).remove();
         });
-
-        //spinnerFlight1();
     }
 
     var lightningOn = false;
@@ -354,11 +342,17 @@ $(function () {
 
     init();
 
+    function closeInfoOverlay()
+    {
+        $('#infoOverlay').fadeOut(250);
+        infoIsOpen = false;
+    }
+
     $('#fullscreen').click(function () {
         if (screenfull.enabled) {
 
             screenfull.toggle();
-            $('#fullscreen').toggleClass("fa-expand", !screenfull.isFullscreen).toggleClass("fa-compress", screenfull.isFullscreen);
+            $('#fullscreen > i').toggleClass("fa-expand", !screenfull.isFullscreen).toggleClass("fa-compress", screenfull.isFullscreen);
         }
     });
 
@@ -367,16 +361,49 @@ $(function () {
     $('#mute').click(function () {
 
         isMute = !isMute;
-        $('#mute').toggleClass("fa-volume-up", !isMute).toggleClass("fa-volume-off", isMute)[0];
+        $('#mute > i').toggleClass("fa-volume-up", !isMute).toggleClass("fa-volume-off", isMute)[0];
         $('#ambientAudio')[0].muted = isMute;
 
     });
+
+    $('#info').click(function(){
+        if(infoIsOpen)
+        {
+            closeInfoOverlay();
+        }
+        else
+        {
+            $('#infoOverlay').fadeIn(250);
+            infoIsOpen = true;
+        }
+    });
+
+    $('#infoOverlay').click(closeInfoOverlay);
+
+    // Has the user specified their own video list?
+    var userVideos = getQueryVariable("videos");
+
+    if(userVideos)
+    {
+        videos = userVideos.split(',');
+    }
 
     playNextVideoInPlaylist();
 });
 
 function getRandom(min, max) {
-    return Math.random() * (max - min) + min;
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
 }
 
 function processNeon(target) {

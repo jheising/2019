@@ -3,7 +3,7 @@
 <head>
     <title>2019</title>
     <link href='http://fonts.googleapis.com/css?family=Pathway+Gothic+One' rel='stylesheet' type='text/css'>
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.createjs.com/createjs-2013.12.12.min.js"></script>
@@ -40,9 +40,43 @@
     </div>
 </div>
 
-<div id="footer">
-    <a target="_blank" href="https://github.com/jheising/2019">2019</a>
-    <div id="controls" class="toolbar"><i id="fullscreen" class="fa fa-expand"></i><i id="mute" class="fa fa-volume-up"></i></div>
+<div id="infoOverlay">
+    <div id="infoBox">
+        <h1>2019</h1>
+        <p style="margin-bottom: 10px;">
+            A browser experiment by <a href="http://twitter.com/jimheising" target="_blank">@jimheising</a>
+        </p>
+        <ul class="toolbar" style="margin-bottom: 50px;">
+            <li><a href="https://twitter.com/home?status=2019%20-%20A%20browser%20experiment%20by%20@jimheising%20http://jheising.github.io/2019/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://jheising.github.io/2019/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="http://www.reddit.com/submit?url=http%3A%2F%2Fjheising.github.io%2F2019%2F&title=2019+-+A+browser+experiment" target="_blank"><i class="fa fa-reddit"></i></a></li>
+            <li><a href="https://github.com/jheising/2019" target="_blank"><i class="fa fa-github"></i></a></li>
+        </ul>
+        <p>
+            Play Vimeo videos in the billboard by appending ?videos= and one or more comma separated video ids.
+            <br/>
+            Example: <a href="http://jheising.github.io/2019?videos=21589292,14294561">http://jheising.github.io/2019?videos=21589292,14294561</a>
+        </p>
+    </div>
 </div>
+
+<div id="footer">
+    <a target="_blank" href="https://github.com/jheising/2019"><h1>2019</h1></a>
+    <ul id="controls" class="toolbar">
+        <li id="fullscreen"><i class="fa fa-expand"></i></li>
+        <li id="mute"><i class="fa fa-volume-up"></i></li>
+        <li id="info"><i class="fa fa-info-circle"></i></li>
+    </ul>
+</div>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-51263210-1', 'jheising.github.io');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>
