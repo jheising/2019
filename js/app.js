@@ -1,3 +1,8 @@
+/*!
+ * 2019
+ * (c) Jim Heising <jheising@gmail.com>; MIT License
+ */
+
 var stage;
 var loadQueue;
 var layers = {};
@@ -348,6 +353,12 @@ $(function () {
         infoIsOpen = false;
     }
 
+    function openInfoOverlay()
+    {
+        $('#infoOverlay').fadeIn(250);
+        infoIsOpen = true;
+    }
+
     $('#fullscreen').click(function () {
         if (screenfull.enabled) {
 
@@ -366,15 +377,14 @@ $(function () {
 
     });
 
-    $('#info').click(function(){
+    $('#info, #title').click(function(){
         if(infoIsOpen)
         {
             closeInfoOverlay();
         }
         else
         {
-            $('#infoOverlay').fadeIn(250);
-            infoIsOpen = true;
+            openInfoOverlay();
         }
     });
 
