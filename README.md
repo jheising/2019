@@ -17,7 +17,9 @@ Originally my idea was to build this entirely in 3D, but IMHO even the best Holl
 
 ***Trick #3 - Add some noise.*** The film-grain effect is another overlay on top of the flickering lights and everything else that just adds more "movement" to the scene. It's just another image of noise that is randomly moved around the page.
 
-***Trick #4 - Make things imperfect.*** One of the more difficult parts of the image composite was the billboard area. This had a still image of a geisha that was comprised of a matrix of lights. I had to create an overlay mask for this matrix so the video could be seen behind it. Because of the complexity and imperfection of this matrix, it would be really difficult to remove and mask out the matrix pixels individually. So I had to create my own pattern of dots and transform it (using the Photoshop perspective/vanishing point tool) to fit into the perspective of the scene. This wasn't that hard to do, but it just didn't look right. So I spent a ton of time adding imperfections into the matrix to make it appear aged and give the illusion of depth and imperfection.
+***Trick #4 - Make things imperfect.*** One of the more difficult parts of the image composite was the billboard area. This had a still image of a geisha that was comprised of a matrix of lights. I had to create an overlay mask for this matrix so the video could be seen behind it. Because of the complexity and imperfection of this matrix, it would be really difficult to remove and mask out the matrix pixels individually. So I had to create my own pattern of dots and transform it (using the Photoshop perspective/vanishing point tool) to fit into the perspective of the scene. This wasn't that hard to do, but it just didn't look right. So I spent a ton of time adding imperfections into the matrix to make it appear aged and give the illusion of depth and imperfection. It's still not exactly where I want it to be, but it's good enough for now.
+
+***Trick #5 - Little Random Stuff.*** If you scan the whole image you should see a lot of little things that hopefully add to the realism. Blinking lights on buildings. Flickering neon lights. Lightning strikes in the distance. Smoke rising up over the Hilton (or is it Hyatt?) hotel. There is also a nearby apartment light that turns on/off and periodic intervals— I imagine this to be Deckard's apartment :)
 
 ### How to use it
 
@@ -30,5 +32,12 @@ Many... I've only optimized for Chrome and Safari on the Mac. Firefox appears to
 ### To Dos
 
 - Increase performace
+- More random lights turning on/off
 - Add animations for flying Spinners
 - Create a mobile version (if possible)
+
+### Credits
+
+Music/Sound: https://www.youtube.com/watch?v=TrwomEhVklw and http://curtis8516.tumblr.com/
+Videos on Billboard: 
+
