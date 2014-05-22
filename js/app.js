@@ -6,6 +6,27 @@ var videoScreenHeight = 1152;
 var videoScreenWidth = 495;
 var grainStage;
 
+var videos = [65241541, 14288152, 41881648]; // Some default cool videos
+var videoIndex = 0;
+
+function loadVideoPlaylist(_videos)
+{
+    videos = _videos;
+    videoIndex = 0;
+    playNextVideoInPlaylist();
+}
+
+function playNextVideoInPlaylist()
+{
+    loadVimeoVideo(videos[videoIndex]);
+
+    videoIndex++;
+    if(videoIndex >= videos.length)
+    {
+        videoIndex = 0;
+    }
+}
+
 function loadVimeoVideo(videoID) {
 
     var url = "http://player.vimeo.com/video/" + videoID;
@@ -22,11 +43,11 @@ function loadVimeoVideo(videoID) {
         };
         contentWindow.postMessage(JSON.stringify(message), url);
 
-        message = {
+        /*message = {
             method: "setLoop",
             value: 1
         };
-        contentWindow.postMessage(JSON.stringify(message), url);
+        contentWindow.postMessage(JSON.stringify(message), url);*/
 
         message = {
             method: "play"
@@ -54,11 +75,9 @@ function onVimeoMessageReceived(e) {
         //    break;
 
         case 'finish':
-            onFinish();
+            playNextVideoInPlaylist();
             break;
     }
-
-    console.log(data);
 }
 
 $(function () {
@@ -348,6 +367,8 @@ $(function () {
         $('#mute').toggleClass("fa-volume-up", !isMute).toggleClass("fa-volume-off", isMute);
 
     });
+
+    playNextVideoInPlaylist();
 });
 
 function getRandom(min, max) {
