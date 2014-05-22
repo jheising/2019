@@ -6,7 +6,7 @@ var videoScreenHeight = 1152;
 var videoScreenWidth = 495;
 var grainStage;
 
-var videos = [65241541, 14288152, 41881648, 75272501, 6839316, 11057525, 13177797, 13179303]; // Some default cool videos
+var videos = [65241541, 14288152, 41881648, 75272501, 6839316, 11057525, 13177797, 13179303, 35602560, 2026165, 27910846, 2881326]; // Some default cool videos
 
 function loadVideoPlaylist(_videos)
 {
