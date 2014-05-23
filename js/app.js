@@ -13,6 +13,7 @@ var grainStage;
 var infoIsOpen = false;
 
 var videos = [65241541, 14288152, 41881648, 75272501, 6839316, 11057525, 35602560, 2026165, 27910846, 26199158, 84608237, 49037990, 33188079, 72038249, 67923125]; // Some default cool videos
+var currentVideoURL;
 
 function playNextVideoInPlaylist()
 {
@@ -20,39 +21,35 @@ function playNextVideoInPlaylist()
     loadVimeoVideo(videos[randomIndex].toString().trim());
 }
 
+function playCurrentVimeoVideo()
+{
+    var contentWindow = $("#videoSource")[0].contentWindow;
+
+    var message = {
+        method: "setVolume",
+        value: 0
+    };
+    contentWindow.postMessage(JSON.stringify(message), currentVideoURL);
+
+    message = {
+        method: "addEventListener",
+        value: "finish"
+    };
+    contentWindow.postMessage(JSON.stringify(message), currentVideoURL);
+
+    message = {
+        method: "play"
+    };
+    contentWindow.postMessage(JSON.stringify(message), currentVideoURL);
+}
+
 function loadVimeoVideo(videoID) {
 
-    var url = "http://player.vimeo.com/video/" + videoID;
+    currentVideoURL = "http://player.vimeo.com/video/" + videoID;
 
-    var iframe = $("#videoSource").attr("src", url + "?api=1&title=0&byline=0");
+    console.log("Loading Video: " + currentVideoURL);
 
-    iframe.load(function () {
-
-        var contentWindow = this.contentWindow;
-
-        var message = {
-            method: "setVolume",
-            value: 0
-        };
-        contentWindow.postMessage(JSON.stringify(message), url);
-
-        /*message = {
-            method: "setLoop",
-            value: 1
-        };
-        contentWindow.postMessage(JSON.stringify(message), url);*/
-
-        message = {
-            method: "addEventListener",
-            value: "finish"
-        };
-        contentWindow.postMessage(JSON.stringify(message), url);
-
-        message = {
-            method: "play"
-        };
-        contentWindow.postMessage(JSON.stringify(message), url);
-    });
+    $("#videoSource").attr("src", currentVideoURL + "?api=1&title=0&byline=0");
 }
 
 // Handle messages received from the vimeo
@@ -69,9 +66,9 @@ function onVimeoMessageReceived(e) {
     var data = JSON.parse(e.data);
 
     switch (data.event) {
-        //case 'ready':
-        //    onReady();
-        //    break;
+        case 'ready':
+            playCurrentVimeoVideo();
+            break;
 
         case 'finish':
             playNextVideoInPlaylist();
