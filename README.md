@@ -7,7 +7,7 @@ http://jheising.github.io/2019
 
 ### Background
 
-This is a little project of an idea I had around 8 years ago, but finally got around to doing. Originally the idea was to make a compiled screensaver that I could drone out to, but recently I decided it would be more fun to see if it could be done in the browser. The idea is to see what is possible with real-time video compositing in the browser— things start to get a bit CPU intensive when you are working with many levels and layers of alpha channels.
+This stemmed from an idea I had around 8 years ago, but finally got around to doing. Originally the idea was to make a compiled screensaver that I could drone out to, but recently I decided it would be more fun to see if it could be done in the browser. The idea is to see what is possible with real-time video compositing in the browser— things start to get a bit CPU intensive when you are working with many levels and layers of alpha channels.
 
 ### How it was done
 
@@ -47,7 +47,7 @@ Many... I've only optimized for Chrome and Safari on the Mac. Firefox appears to
 
 ### Credits
 
-Music/Sound: https://www.youtube.com/watch?v=TrwomEhVklw and http://curtis8516.tumblr.com/
+Ambient Sound: https://www.youtube.com/watch?v=TrwomEhVklw and http://curtis8516.tumblr.com/
 
 Videos on Billboard: https://vimeo.com/[65241541, 14288152, 41881648, 75272501, 6839316, 11057525, 35602560, 2026165, 27910846, 26199158, 84608237, 49037990, 33188079, 72038249, 67923125]
 
