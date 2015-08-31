@@ -21,6 +21,7 @@ function playNextVideoInPlaylist()
     loadVimeoVideo(videos[randomIndex].toString().trim());
 }
 
+var playerOrigin = '*';
 function playCurrentVimeoVideo()
 {
     var contentWindow = $("#videoSource")[0].contentWindow;
@@ -29,41 +30,41 @@ function playCurrentVimeoVideo()
         method: "setVolume",
         value: 0
     };
-    contentWindow.postMessage(JSON.stringify(message), currentVideoURL);
+    contentWindow.postMessage(JSON.stringify(message), playerOrigin);
 
     message = {
         method: "addEventListener",
         value: "finish"
     };
-    contentWindow.postMessage(JSON.stringify(message), currentVideoURL);
+    contentWindow.postMessage(JSON.stringify(message), playerOrigin);
 
     message = {
         method: "play"
     };
-    contentWindow.postMessage(JSON.stringify(message), currentVideoURL);
+    contentWindow.postMessage(JSON.stringify(message), playerOrigin);
 }
 
 function loadVimeoVideo(videoID) {
 
-    currentVideoURL = "http://player.vimeo.com/video/" + videoID;
+    currentVideoURL = "https://player.vimeo.com/video/" + videoID;
 
     console.log("Loading Video: " + currentVideoURL);
 
-    $("#videoSource").attr("src", currentVideoURL + "?api=1&title=0&byline=0");
+    $("#videoSource").attr("src", currentVideoURL + "?api=1&title=0&byline=0&autoplay=1");
 }
 
-// Handle messages received from the vimeo
-if (window.addEventListener)
-{
-    window.addEventListener('message', onVimeoMessageReceived, false);
-}
-else
-{
-    window.attachEvent('onmessage', onVimeoMessageReceived, false);
-}
+function onMessageReceived(event) {
 
-function onVimeoMessageReceived(e) {
-    var data = JSON.parse(e.data);
+    // Handle messages from the vimeo player only
+    if (!(/^https?:\/\/player.vimeo.com/).test(event.origin)) {
+        return false;
+    }
+
+    if (playerOrigin === '*') {
+        playerOrigin = event.origin;
+    }
+
+    var data = JSON.parse(event.data);
 
     switch (data.event) {
         case 'ready':
@@ -77,6 +78,14 @@ function onVimeoMessageReceived(e) {
 }
 
 $(function () {
+
+    // Listen for messages from the video player
+    if (window.addEventListener) {
+        window.addEventListener('message', onMessageReceived, false);
+    }
+    else {
+        window.attachEvent('onmessage', onMessageReceived, false);
+    }
 
     var grainCanvas = document.getElementById("grain");
     var canvas = document.getElementById("mainCanvas");
